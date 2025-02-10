@@ -1,0 +1,86 @@
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #0096c7, #a3b18a);
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .filter-section {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        select, button {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button {
+            background-color: #00b4d8;
+            color: white;
+            cursor: pointer;
+        }
+        .packages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .package-card {
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            position: relative;
+        }
+        .package-card:hover {
+            transform: scale(1.05);
+        }
+        .package-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .package-card h3 {
+            margin: 10px 0;
+            color: #333;
+        }
+        .package-card p {
+            color: #777;
+        }
+        .rating {
+            color: gold;
+            margin: 5px 0;
+        }
+        .compare-btn {
+            background-color: #0096c7;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+        .calendar {
+            margin-top: 10px;
+        }
+        .map-container {
+            width: 100%;
+            height: 300px;
+            background: #ddd;
+            margin-top: 20px;
+        }
+   

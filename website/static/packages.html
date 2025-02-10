@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Packages</title>
+    <link rel="stylesheet" href="packages.css">
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Find Your Perfect Travel Package</h1>
+        <div class="filter-section">
+            <select id="packageType">
+                <option value="all">All Packages</option>
+                <option value="cheap">Budget-Friendly</option>
+                <option value="luxury">Luxury</option>
+                <option value="comfortable">Comfortable</option>
+                <option value="trending">Trending</option>
+                <option value="deals">Limited-Time Deals</option>
+            </select>
+            <button onclick="filterPackages()">Filter</button>
+        </div>
+        <div class="packages" id="packageList">
+            <div class="package-card" data-type="cheap">
+                <img src="budget.jpg" alt="Budget Trip">
+                <h3>Budget Adventure</h3>
+                <p>Explore the world on a budget with amazing deals!</p>
+                <div class="rating">⭐⭐⭐⭐</div>
+                <button class="compare-btn">Compare</button>
+                <input type="date" class="calendar">
+            </div>
+            <div class="package-card" data-type="luxury">
+                <img src="luxury.jpg" alt="Luxury Trip">
+                <h3>Luxury Escape</h3>
+                <p>Experience ultimate luxury and comfort in exotic locations.</p>
+                <div class="rating">⭐⭐⭐⭐⭐</div>
+                <button class="compare-btn">Compare</button>
+                <input type="date" class="calendar">
+            </div>
+            <div class="package-card" data-type="comfortable">
+                <img src="comfort.jpg" alt="Comfortable Trip">
+                <h3>Comfort Retreat</h3>
+                <p>Relax and enjoy a stress-free journey with top amenities.</p>
+                <div class="rating">⭐⭐⭐⭐</div>
+                <button class="compare-btn">Compare</button>
+                <input type="date" class="calendar">
+            </div>
+        </div>
+        <div class="map-container" id="map"></div>
+    </div>
+    <script>
+        function filterPackages() {
+            let filter = document.getElementById("packageType").value;
+            let packages = document.querySelectorAll(".package-card");
+            packages.forEach(pkg => {
+                if (filter === "all" || pkg.getAttribute("data-type") === filter) {
+                    pkg.style.display = "block";
+                } else {
+                    pkg.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
