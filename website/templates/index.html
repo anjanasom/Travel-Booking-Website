@@ -33,17 +33,17 @@
         <h2>Ultimate Getaway Destinations</h2>
         <div class="destination-cards">
             <div class="destination-card">
-                <img src="paris.jpg" alt="Paris">
+                <img src="{{ url_for('static', filename='paris.jpg') }}" alt="Paris">
                 <h3>Paris, France</h3>
                 <p>Experience the romance and charm of the City of Lights.</p>
             </div>
             <div class="destination-card">
-                <img src="bali.jpg" alt="Bali">
+                <img src="{{ url_for('static', filename='bali.jpg') }}" alt="Bali">
                 <h3>Bali, Indonesia</h3>
                 <p>Relax on pristine beaches and explore vibrant culture.</p>
             </div>
             <div class="destination-card">
-                <img src="dubai.jpg" alt="Dubai">
+                <img src="{{ url_for('static', filename='dubai.jpg') }}" alt="Dubai">
                 <h3>Dubai, UAE</h3>
                 <p>Witness futuristic architecture and luxury shopping.</p>
             </div>
@@ -55,9 +55,9 @@
     <footer>
         <p>&copy; 2025 GoGlobe. All rights reserved.</p>
         <ul class="social-icons">
-            <li><a href="#"><img src="facebook-icon.png" alt="Facebook"></a></li>
-            <li><a href="https://x.com/"><img src="twitter-icon.png" alt="Twitter"></a></li>
-            <li><a href="https://www.instagram.com/"><img src="instagram-icon.png" alt="Instagram"></a></li>
+            <li><a href="#"><img src="{{ url_for('static', filename='facebook-icon.png') }}" alt="Facebook"></a></li>
+            <li><a href="https://x.com/"><img src="{{ url_for('static', filename='twitter-icon.png') }}" alt="Twitter"></a></li>
+            <li><a href="https://www.instagram.com/"><img src="{{ url_for('static', filename='instagram-icon.png') }}" alt="Instagram"></a></li>
         </ul>
     </footer>
 </body>

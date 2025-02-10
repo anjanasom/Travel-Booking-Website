@@ -23,7 +23,7 @@
         </div>
         <div class="packages" id="packageList">
             <div class="package-card" data-type="cheap">
-                <img src="budget.jpg" alt="Budget Trip">
+                <img src="{{ url_for('static', filename='budget.jpg') }}" alt="Budget Trip">
                 <h3>Budget Adventure</h3>
                 <p>Explore the world on a budget with amazing deals!</p>
                 <div class="rating">⭐⭐⭐⭐</div>
@@ -31,7 +31,7 @@
                 <input type="date" class="calendar">
             </div>
             <div class="package-card" data-type="luxury">
-                <img src="luxury.jpg" alt="Luxury Trip">
+                <img src="{{ url_for('static', filename='luxury.jpg') }}" alt="Luxury Trip">
                 <h3>Luxury Escape</h3>
                 <p>Experience ultimate luxury and comfort in exotic locations.</p>
                 <div class="rating">⭐⭐⭐⭐⭐</div>
@@ -39,7 +39,7 @@
                 <input type="date" class="calendar">
             </div>
             <div class="package-card" data-type="comfortable">
-                <img src="comfort.jpg" alt="Comfortable Trip">
+                <img src="{{ url_for('static', filename='comfort.jpg') }}" alt="Comfortable Trip">
                 <h3>Comfort Retreat</h3>
                 <p>Relax and enjoy a stress-free journey with top amenities.</p>
                 <div class="rating">⭐⭐⭐⭐</div>
