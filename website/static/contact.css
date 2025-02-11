@@ -1,88 +1,97 @@
-/* General Reset */
-* {
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f0f8ff, #e6f2ff);
+    color: #333;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
 }
-
-/* Contact Header */
 .contact-header {
-    background: linear-gradient(90deg, #03045e, #0077b6);
+    background: linear-gradient(135deg, #00aaff, #0066cc);
     color: white;
     text-align: center;
-    padding: 2rem 0;
+    padding: 40px;
+    font-size: 1.5em;
+    border-bottom: 5px solid #005bb5;
 }
-
-.contact-header h1 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+.about-us, .contact-container, .faq-section, .social-media {
+    max-width: 900px;
+    margin: 30px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
 }
-
-.contact-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-    flex-wrap: wrap;
-    gap: 2rem;
+.about-us:hover, .contact-container:hover, .faq-section:hover, .social-media:hover {
+    transform: scale(1.02);
 }
-
+h2, h3 {
+    color: #004080;
+    text-align: center;
+}
 .contact-info {
-    flex: 1;
-    max-width: 400px;
     text-align: center;
+    font-size: 1.1em;
 }
-
-.contact-info h2 {
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-    color: #333;
-}
-
 .contact-form {
-    flex: 1;
-    max-width: 400px;
-    background: #f9f9f9;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
-.contact-form h3 {
-    text-align: center;
-    margin-bottom: 1rem;
-    color: #0077b6;
-}
-
-.contact-form input,
-.contact-form textarea {
+.contact-form input, .contact-form textarea {
     width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    max-width: 600px;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: all 0.3s ease;
 }
-
+.contact-form input:focus, .contact-form textarea:focus {
+    border-color: #005bb5;
+    outline: none;
+}
 .contact-form button {
-    width: 100%;
-    padding: 0.75rem;
-    background: #0077b6;
+    background: #0066cc;
     color: white;
+    padding: 12px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background 0.3s;
+    font-size: 18px;
+    transition: all 0.3s ease;
 }
-
 .contact-form button:hover {
-    background: #0056b3;
+    background: #005bb5;
+    transform: scale(1.05);
 }
-
-footer {
-    background: #333;
-    color: white;
+.faq-section {
+    text-align: left;
+}
+.faq-question {
+    font-weight: bold;
+    margin-top: 10px;
+}
+.social-media {
     text-align: center;
-    padding: 1rem 0;
-    margin-top: 2rem;
+}
+.social-icons a {
+    margin: 0 10px;
+    font-size: 24px;
+    color: #0066cc;
+    transition: transform 0.3s ease;
+}
+.social-icons a:hover {
+    transform: scale(1.2);
+    color: #004080;
+}
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #004080;
+    color: white;
+    font-size: 1.1em;
+    margin-top: 30px;
 }
