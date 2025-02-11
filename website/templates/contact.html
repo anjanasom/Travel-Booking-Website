@@ -3,8 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
+    <title>Contact Us | Travel Explorer</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='contact.css') }}">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f0f8ff, #e6f2ff);
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .contact-header {
+            background: linear-gradient(135deg, #00aaff, #0066cc);
+            color: white;
+            text-align: center;
+            padding: 40px;
+            font-size: 1.5em;
+            border-bottom: 5px solid #005bb5;
+        }
+        .about-us, .contact-container, .faq-section, .social-media {
+            max-width: 900px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+        .about-us:hover, .contact-container:hover, .faq-section:hover, .social-media:hover {
+            transform: scale(1.02);
+        }
+        h2, h3 {
+            color: #004080;
+            text-align: center;
+        }
+        .contact-info {
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            max-width: 600px;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: #005bb5;
+            outline: none;
+        }
+        .contact-form button {
+            background: #0066cc;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        .contact-form button:hover {
+            background: #005bb5;
+            transform: scale(1.05);
+        }
+        .faq-section {
+            text-align: left;
+        }
+        .faq-question {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .social-media {
+            text-align: center;
+        }
+        .social-icons a {
+            margin: 0 10px;
+            font-size: 24px;
+            color: #0066cc;
+            transition: transform 0.3s ease;
+        }
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #004080;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #004080;
+            color: white;
+            font-size: 1.1em;
+            margin-top: 30px;
+        }
+    </style>
 </head>
 <body>
     <header class="contact-header">
@@ -12,12 +110,18 @@
         <p>Let's plan your next adventure!</p>
     </header>
 
+    <section class="about-us">
+        <h2>About Us</h2>
+        <p>Welcome to <strong>Travel Explorer</strong>! Our mission is to make travel planning easier, more enjoyable, and more connected. We created this platform to help travelers discover new destinations, connect with like-minded adventurers, and book their trips effortlessly.</p>
+        <p>We are passionate about bringing the world closer together through travel. Our team of experts is here to provide the best recommendations, exclusive deals, and community-driven experiences.</p>
+    </section>
+
     <section class="contact-container">
         <div class="contact-info">
             <h2>Get in Touch</h2>
-            <p>Email: contact@travelexplorer.com</p>
-            <p>Phone: +123 456 7890</p>
-            <p>Address: 123 Travel Street, Wonderland</p>
+            <p><strong>Email:</strong> contact@travelexplorer.com</p>
+            <p><strong>Phone:</strong> +123 456 7890</p>
+            <p><strong>Address:</strong> 123 Travel Street, Wonderland</p>
         </div>
         
         <div class="contact-form">
@@ -31,9 +135,25 @@
         </div>
     </section>
 
+    <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <p class="faq-question">How can I book a trip?</p>
+        <p>Simply sign up, choose your destination, and follow the guided booking process.</p>
+        <p class="faq-question">Do you offer travel insurance?</p>
+        <p>Yes! We partner with top insurance providers to keep your trips safe.</p>
+    </section>
+
+    <section class="social-media">
+        <h2>Follow Us</h2>
+        <div class="social-icons">
+            <a href="#" target="_blank">🌍 Facebook</a>
+            <a href="#" target="_blank">📸 Instagram</a>
+            <a href="#" target="_blank">🐦 Twitter</a>
+        </div>
+    </section>
+
     <footer>
         <p>&copy; 2025 Travel Explorer. All rights reserved.</p>
     </footer>
 </body>
 </html>
-
