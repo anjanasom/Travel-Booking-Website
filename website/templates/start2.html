@@ -52,10 +52,10 @@
         <!-- Trains Form -->
         <form class="form-section" id="trains" action="{{ url_for('book.search_trains') }}" method="POST">
             <label for="train-from">From:</label>
-            <input type="text" id="train-from" name="from_station" placeholder="Enter station or city" required>
+            <input type="text" id="train-from" name="from_station" placeholder="Enter station code" required>
         
             <label for="train-to">To:</label>
-            <input type="text" id="train-to" name="to_station" placeholder="Enter station or city" required>
+            <input type="text" id="train-to" name="to_station" placeholder="Enter station code" required>
         
             <label for="train-date">Travel Date:</label>
             <input type="date" id="train-date" name="travel_date" required>
