@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Booking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='start.css') }}">
+</head>
+<body>
+
+    <div class="booking-container">
+        <h2>Plan Your Trip</h2>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('flights', event)">Flights</button>
+            <button class="tab" onclick="showTab('trains', event)">Trains</button>
+            <button class="tab" onclick="showTab('buses', event)">Buses</button>
+            <button class="tab" onclick="showTab('hotels', event)">Hotels</button>
+        </div>
+
+        <!-- Flights Form -->
+        <form class="form-section active" id="flights" action="{{ url_for('book.search_flights') }}" method="POST">
+            <label for="flight-from">From:</label>
+            <input type="text" id="flight-from" name="from_city" placeholder="Enter city or airport" required>
+        
+            <label for="flight-to">To:</label>
+            <input type="text" id="flight-to" name="to_city" placeholder="Enter city or airport" required>
+        
+            <label for="flight-departure">Departure:</label>
+            <input type="date" id="flight-departure" name="departure_date" required>
+        
+            <label for="flight-return">Return:</label>
+            <input type="date" id="flight-return" name="return_date">
+        
+            <label for="flight-travellers">Travellers & Class:</label>
+            <select id="flight-travellers" name="travellers_class">
+                <option value="1 Adult - Economy">1 Adult - Economy</option>
+                <option value="2 Adults - Economy">2 Adults - Economy</option>
+                <option value="1 Adult - Business">1 Adult - Business</option>
+                <option value="2 Adults - Business">2 Adults - Business</option>
+            </select>
+        
+            <div class="trip-type">
+                <label><input type="radio" name="trip_type" value="one-way" checked> One-way</label>
+                <label><input type="radio" name="trip_type" value="round-trip"> Round-trip</label>
+            </div>
+        
+            <button type="submit">Search Flights</button>
+        </form>
+        
+
+        <!-- Trains Form -->
+        <form class="form-section" id="trains" action="{{ url_for('book.search_trains') }}" method="POST">
+            <label for="train-from">From:</label>
+            <input type="text" id="train-from" name="from_station" placeholder="Enter station or city" required>
+        
+            <label for="train-to">To:</label>
+            <input type="text" id="train-to" name="to_station" placeholder="Enter station or city" required>
+        
+            <label for="train-date">Travel Date:</label>
+            <input type="date" id="train-date" name="travel_date" required>
+        
+            <label for="train-class">Class:</label>
+            <select id="train-class" name="train_class">
+                <option value="Second AC">Second AC</option>
+                <option value="Third AC">Third AC</option>
+                <option value="Sleeper">Sleeper</option>
+                <option value="General">General</option>
+            </select>
+        
+            <button type="submit">Search Trains</button>
+        </form>
+        
+
+        <!-- Buses Form -->
+        <form class="form-section" id="buses" action="{{ url_for('book.search_buses') }}" method="POST">
+            <label for="bus-from">From:</label>
+            <input type="text" id="bus-from" name="from_city" placeholder="Enter city or bus stop" required>
+        
+            <label for="bus-to">To:</label>
+            <input type="text" id="bus-to" name="to_city" placeholder="Enter city or bus stop" required>
+        
+            <label for="bus-date">Travel Date:</label>
+            <input type="date" id="bus-date" name="travel_date" required>
+        
+            <button type="submit">Search Buses</button>
+        </form>
+        
+
+        <!-- Hotels Form -->
+        <form class="form-section" id="hotels" action="{{ url_for('book.search_hotels') }}" method="POST">
+            <label for="hotel-city">City:</label>
+            <input type="text" id="hotel-city" name="hotel_city" placeholder="Enter city or location" required>
+        
+            <label for="hotel-checkin">Check-in Date:</label>
+            <input type="date" id="hotel-checkin" name="checkin_date" required>
+        
+            <label for="hotel-checkout">Check-out Date:</label>
+            <input type="date" id="hotel-checkout" name="checkout_date" required>
+        
+            <label for="hotel-guests">Guests:</label>
+            <select id="hotel-guests" name="num_guests">
+                <option value="1 Room - 2 Guests">1 Room - 2 Guests</option>
+                <option value="2 Rooms - 4 Guests">2 Rooms - 4 Guests</option>
+                <option value="1 Room - 1 Guest">1 Room - 1 Guest</option>
+            </select>
+        
+            <button type="submit">Search Hotels</button>
+        </form>
+        
+
+    </div>
+
+    <script>
+        function showTab(tab, event) {
+            document.querySelectorAll('.tab').forEach(tabElement => {
+                tabElement.classList.remove('active');
+            });
+            document.querySelectorAll('.form-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(tab).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.querySelectorAll('input[type="date"]').forEach(input => {
+                input.setAttribute("min", today);
+                input.value = today;
+            });
+        });
+    </script>
+
+</body>
+</html>
