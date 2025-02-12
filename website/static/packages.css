@@ -1,125 +1,98 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #0096c7, #a3b18a);
+    text-align: center;
+}
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+.filter-section {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+select, button {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+button {
+    background-color: #00b4d8;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+button:hover {
+    background-color: #0077a3;
+}
+.packages {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+.package-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+}
+.package-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+.package-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+.package-card h3 {
+    margin: 10px 0;
+    color: #333;
+}
+.package-card p {
+    color: #777;
+}
+.rating {
+    color: gold;
+    margin: 5px 0;
+}
+.compare-btn {
+    background-color: #0096c7;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.compare-btn:hover {
+    background-color: #0077a3;
+}
+.calendar {
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.map-container {
+    width: 100%;
+    height: 450px;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
 
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to right, #0096c7, #a3b18a);
-            text-align: center;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-        }
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-        .filter-section {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        select, button {
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-        }
-        button {
-            background-color: #00b4d8;
-            color: white;
-            cursor: pointer;
-        }
-        .packages {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .package-card {
-            background: #fff;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-            position: relative;
-        }
-        .package-card:hover {
-            transform: scale(1.05);
-        }
-        .package-card img {
-            width: 100%;
-            border-radius: 10px;
-        }
-        .package-card h3 {
-            margin: 10px 0;
-            color: #333;
-        }
-        .package-card p {
-            color: #777;
-        }
-        .rating {
-            color: gold;
-            margin: 5px 0;
-        }
-        .compare-btn {
-            background-color: #0096c7;
-            padding: 5px 10px;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            cursor: pointer;
-        }
-        .calendar {
-            margin-top: 10px;
-        }
-        .map-container {
-            width: 100%;
-            height: 300px;
-            background: #ddd;
-            margin-top: 20px;
-        }
-
-        /* Navbar */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #caf0f8;
-            padding: 1rem 2rem;
-            color: #03045e;
-        }
-        .navbar .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            list-style: none;
-        }
-        .nav-links li a {
-            text-decoration: none;
-            color: #03045e;
-            font-size: 1rem;
-            transition: color 0.3s;
-        }
-        .nav-links li a:hover {
-            color: #0077b6;
-        }
-        .btn-login {
-            padding: 0.5rem 1rem;
-            background-color: #03045e;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-        .btn-login:hover {
-            background-color: #0077b6;
-        }

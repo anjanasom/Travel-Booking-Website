@@ -5,21 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Packages</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='packages.css') }}">
-    
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
 </head>
 <body>
-    <!-- Navbar -->
-    <header class="navbar">
-        <div class="logo">GoGlobe</div>
-        <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/travelgroups">TravelGroups</a></li>
-            <li><a href="/packages">Packages</a></li>
-            <li><a href="/contact">Contact</a></li>
-        </ul>
-        <a class="btn-login" href="/signup">Sign Up</a>
-    </header>
-    
     <div class="container">
         <h1>Find Your Perfect Travel Package</h1>
         <div class="filter-section">
@@ -61,6 +50,7 @@
         </div>
         <div class="map-container" id="map"></div>
     </div>
+
     <script>
         function filterPackages() {
             let filter = document.getElementById("packageType").value;
@@ -73,6 +63,25 @@
                 }
             });
         }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var map = L.map('map', {
+                center: [51.505, -0.09],
+                zoom: 13
+            });
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Enable all interactions
+            map.dragging.enable();
+            map.touchZoom.enable();
+            map.scrollWheelZoom.enable();
+            map.doubleClickZoom.enable();
+            map.boxZoom.enable();
+            map.keyboard.enable();
+        });
     </script>
 </body>
 </html>
