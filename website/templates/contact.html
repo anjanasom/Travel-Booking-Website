@@ -29,10 +29,10 @@
         
         <div class="contact-form">
             <h3>Send Us a Message</h3>
-            <form action="#" method="post">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email" required>
-                <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+            <form name="sendMessage" id="contactForm" action="#" method="POST">
+                <input type="text" name="name" id ="name" placeholder="Your Name" required data-required-validation-message="Please enter your name">
+                <input type="email" name="email" id="email" placeholder="Your Email" required data-required-validation-message="Please enter your email">
+                <textarea name="message" id="message" placeholder="Your Message" rows="4" required data-required-validation-message="Please enter your message"></textarea>
                 <button type="submit">Send Message</button>
             </form>
         </div>

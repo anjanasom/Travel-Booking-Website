@@ -7,7 +7,7 @@ views = Blueprint('views', __name__)
 def home():
     return render_template("index.html")
 
-@views.route('/contact')
+@views.route('/contact', methods=['GET', 'POST'])
 def contact():
     return render_template("contact.html")
 
