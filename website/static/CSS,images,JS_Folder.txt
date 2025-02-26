@@ -1,1 +1,0 @@
-Please put all CSS, JavaScript, and image files in static folder
