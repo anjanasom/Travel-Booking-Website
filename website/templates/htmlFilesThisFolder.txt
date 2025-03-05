@@ -1,1 +1,0 @@
-Please put all html files in templates folder
