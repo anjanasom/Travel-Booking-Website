@@ -1,6 +1,7 @@
 # For booking logic
 import requests
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
+from flask_login import login_required, current_user
 
 book = Blueprint('book', __name__)
 
