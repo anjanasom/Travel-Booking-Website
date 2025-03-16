@@ -1,9 +1,16 @@
 # For booking logic
 import requests
-from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
+from amadeus import Client, ResponseError
 
 book = Blueprint('book', __name__)
+
+#flight api config
+amadeus = Client(
+    client_id="BpGm7QjbjY7owWyrS8kd3ttVBbOA3Fc5",
+    client_secret="AundJzuKMKWkdVBy"
+)
 
 @book.route('/start2')
 def start():
@@ -41,13 +48,44 @@ def search_flights():
     departure_date = request.form.get("departure_date")
     return_date = request.form.get("return_date", None)
     trip_type = request.form.get("trip_type")
-    travellers_class = request.form.get("travellers_class")
+    adults = request.form.get("adults", "1")
+    children = request.form.get("children", "0")
+    travel_class = request.form.get("travel_class", "ECONOMY").upper()
 
-    if not from_city or not to_city:
+    if not from_city or not to_city or not departure_date:
         flash("Please fill in all required fields.", "error")
-        return redirect(url_for("book.start2"))
+        return redirect(url_for("book.start"))
 
-    return f"Searching flights from {from_city} to {to_city} on {departure_date} - {trip_type}"
+    try:
+        # Create the query parameters
+        params = {
+            "originLocationCode": from_city,
+            "destinationLocationCode": to_city,
+            "departureDate": departure_date,
+            "adults": int(adults),
+            "children": int(children),
+            "travelClass": travel_class,
+            "currencyCode": "INR"
+        }
+
+        # Include returnDate only for round-trip
+        if trip_type == "round-trip" and return_date:
+            params["returnDate"] = return_date
+
+        # Fetch flight offers
+        response = amadeus.shopping.flight_offers_search.get(**params)
+        flight_data = response.data
+
+        if not flight_data:
+            flash("No flights found for the selected date.", "error")
+            return redirect(url_for("book.start"))
+
+        return render_template("flight_results.html", flight_data=flight_data)
+
+    except ResponseError as error:
+        print(f"Error fetching flights: {error}")
+        flash("Failed to fetch flight data. Please try again later.", "error")
+        return redirect(url_for("book.start"))
 
 @book.route('/search-buses', methods=['POST'])
 def search_buses():

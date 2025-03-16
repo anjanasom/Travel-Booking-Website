@@ -7,6 +7,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='start.css') }}">
 </head>
 <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul class="flashes">
+        {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
 
     <div class="booking-container">
         <h2>Plan Your Trip</h2>
@@ -21,29 +30,35 @@
         <!-- Flights Form -->
         <form class="form-section active" id="flights" action="{{ url_for('book.search_flights') }}" method="POST">
             <label for="flight-from">From:</label>
-            <input type="text" id="flight-from" name="from_city" placeholder="Enter city or airport" required>
+            <input type="text" id="flight-from" name="from_city" placeholder="Enter airport code" required>
         
             <label for="flight-to">To:</label>
-            <input type="text" id="flight-to" name="to_city" placeholder="Enter city or airport" required>
+            <input type="text" id="flight-to" name="to_city" placeholder="Enter airport code" required>
         
             <label for="flight-departure">Departure:</label>
             <input type="date" id="flight-departure" name="departure_date" required>
-        
-            <label for="flight-return">Return:</label>
-            <input type="date" id="flight-return" name="return_date">
-        
-            <label for="flight-travellers">Travellers & Class:</label>
-            <select id="flight-travellers" name="travellers_class">
-                <option value="1 Adult - Economy">1 Adult - Economy</option>
-                <option value="2 Adults - Economy">2 Adults - Economy</option>
-                <option value="1 Adult - Business">1 Adult - Business</option>
-                <option value="2 Adults - Business">2 Adults - Business</option>
-            </select>
-        
+
             <div class="trip-type">
-                <label><input type="radio" name="trip_type" value="one-way" checked> One-way</label>
-                <label><input type="radio" name="trip_type" value="round-trip"> Round-trip</label>
+                <label><input type="radio" name="trip_type" value="one-way" checked onclick="toggleReturnDate()"> One-way</label>
+                <label><input type="radio" name="trip_type" value="round-trip" onclick="toggleReturnDate()"> Round-trip</label>
             </div>
+
+            <label for="flight-return">Return:</label>
+            <input type="date" id="flight-return" name="return_date" disabled>
+
+            <label for="flight-class">Travel Class:</label>
+            <select id="flight-class" name="travel_class">
+                <option value="ECONOMY">Economy</option>
+                <option value="PREMIUM_ECONOMY">Premium Economy</option>
+                <option value="BUSINESS">Business</option>
+                <option value="FIRST">First Class</option>
+            </select>
+
+            <label for="adults">Adults:</label>
+            <input type="number" id="adults" name="adults" min="1" value="1" required>
+
+            <label for="children">Children:</label>
+            <input type="number" id="children" name="children" min="0" value="0">
         
             <button type="submit">Search Flights</button>
         </form>
@@ -122,15 +137,40 @@
             document.getElementById(tab).classList.add('active');
             event.target.classList.add('active');
         }
-
+    
         document.addEventListener("DOMContentLoaded", function() {
             const today = new Date().toISOString().split('T')[0];
+    
+            // Set min date for all date inputs
             document.querySelectorAll('input[type="date"]').forEach(input => {
                 input.setAttribute("min", today);
-                input.value = today;
+            });
+    
+            // Initialize return date handling
+            toggleReturnDate();
+    
+            // Attach event listener to trip type radio buttons
+            document.querySelectorAll("input[name='trip_type']").forEach(radio => {
+                radio.addEventListener("change", toggleReturnDate);
             });
         });
+    
+        function toggleReturnDate() {
+            const returnDateField = document.getElementById("flight-return");
+            const roundTripSelected = document.querySelector("input[name='trip_type'][value='round-trip']").checked;
+    
+            if (roundTripSelected) {
+                returnDateField.removeAttribute("disabled");
+                returnDateField.setAttribute("required", "true"); // Make it required for round-trip
+            } else {
+                returnDateField.setAttribute("disabled", "true");
+                returnDateField.removeAttribute("required"); // Remove required if one-way is selected
+                returnDateField.value = ""; // Clear the return date field
+            }
+        }
     </script>
+    
+    
 
 </body>
 </html>
