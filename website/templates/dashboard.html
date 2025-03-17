@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
+<body>
+<!-- Navbar -->
+<header class="navbar">
+    <div class="logo">GoGlobe</div>
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/groups">TravelGroups</a></li>
+        <li><a href="/packages">Packages</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/dashboard">Dashboard</a></li>
+    </ul>
+</header>
+<div class="user-info">
+    <h2>Welcome, {{ user.name }}</h2>
+    <p>Email: {{ user.email }}</p>
+    <form action="{{ url_for('auth.logout') }}" method="POST">
+        <button type="submit" class="logout-btn">Logout</button>
+    </form>
+</div>
+
+<!-- Train Bookings Section -->
+<h3>Your Train Bookings</h3>
+{% if train_bookings %}
+<table>
+    <tr>
+        <th>Train Number</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Class</th>
+        <th>Date</th>
+        <th>Fare</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    {% for booking in train_bookings %}
+    <tr>
+        <td>{{ booking.train_number }}</td>
+        <td>{{ booking.from_station }}</td>
+        <td>{{ booking.to_station }}</td>
+        <td>{{ booking.class_type }}</td>
+        <td>{{ booking.travel_date }}</td>
+        <td>{{ booking.total_fare }}</td>
+        <td>{{ booking.seat_status }}</td>
+        <td>
+            <form action="{{ url_for('book.cancel_train_booking', booking_id=booking.id) }}" method="POST">
+                <button type="submit" class="cancel-btn">Cancel</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No train bookings found.</p>
+{% endif %}
+
+<!-- Flight Bookings Section -->
+<h3>Your Flight Bookings</h3>
+{% if flight_bookings %}
+<table>
+    <tr>
+        <th>Flight Number</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Class</th>
+        <th>Date</th>
+        <th>Fare</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    {% for flight in flight_bookings %}
+    <tr>
+        <td>{{ flight.flight_number }}</td>
+        <td>{{ flight.from_city }}</td>
+        <td>{{ flight.to_city }}</td>
+        <td>{{ flight.travel_class }}</td>
+        <td>{{ flight.departure_date }}</td>
+        <td>{{ flight.total_fare }}</td>
+        <td>{{ flight.seat_status }}</td>
+        <td>
+            <form action="{{ url_for('book.cancel_flight_booking', booking_id=flight.id) }}" method="POST">
+                <button type="submit" class="cancel-btn">Cancel</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No flight bookings found.</p>
+{% endif %}
+
+
+<!-- Travel Groups Section -->
+<h3>Your Travel Groups</h3>
+{% if travel_groups %}
+<table>
+    <tr>
+        <th>Group Name</th>
+        <th>Members</th>
+        <th>Action</th>
+    </tr>
+    {% for group in travel_groups %}
+    <tr>
+        <td>{{ group.name }}</td>
+        <td>{{ group.members|length }}</td>
+        <td>
+            <form action="{{ url_for('views.leave_travel_group', group_id=group.id) }}" method="POST">
+                <button type="submit" class="leave-btn">Leave Group</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>You are not part of any travel groups.</p>
+{% endif %}
+
+</body>
+</html>

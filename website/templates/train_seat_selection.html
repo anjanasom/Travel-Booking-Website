@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Seat Selection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='train_seat_selection.css') }}">
+</head>
+<body>
+    <h2>Select a Seat for Train {{ train_number }}</h2>
+
+    {% if available_seats %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Fare (INR)</th>
+                    <th>Catering Charge</th>
+                    <th>Total Fare</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for seat in available_seats %}
+                <tr>
+                    <td>{{ seat.date }}</td>
+                    <td>{{ seat.ticket_fare }}</td>
+                    <td>{{ seat.catering_charge }}</td>
+                    <td>{{ seat.total_fare }}</td>
+                    <td>{{ seat.status }}</td>
+                    <td>
+                        {% if seat.status != "Not Available" %}
+                        <form action="{{ url_for('book.book_train') }}" method="POST">
+                            <input type="hidden" name="train_number" value="{{ train_number }}">
+                            <input type="hidden" name="from_station" value="{{ from_station }}">
+                            <input type="hidden" name="to_station" value="{{ to_station }}">
+                            <input type="hidden" name="class_type" value="{{ class_type }}">
+                            <input type="hidden" name="travel_date" value="{{ travel_date }}">
+                            <input type="hidden" name="total_fare" value="{{ seat.total_fare }}">
+                            <input type="hidden" name="seat_status" value="{{ seat.status }}">
+                            <button type="submit" class="book-btn">Book</button>
+                        </form>
+                        {% else %}
+                        <span class="unavailable">Not Available</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No available seats found.</p>
+    {% endif %}
+
+    <a href="{{ url_for('book.start') }}" class="back-link">Back to Search</a>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Travel Group</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h2>Create a New Travel Group</h2>
+
+        <form method="POST">
+            <div class="form-group">
+                <label for="name">Group Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="contact_info">Contact Info</label>
+                <input type="text" id="contact_info" name="contact_info" required>
+            </div>
+
+            <div class="form-group">
+                <label for="destinations">Destinations</label>
+                <input type="text" id="destinations" name="destinations" required>
+            </div>
+
+            <button type="submit">Create Group</button>
+        </form>
+    </div>
+</body>
+</html>

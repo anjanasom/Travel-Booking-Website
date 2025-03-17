@@ -25,10 +25,14 @@
                 <tr>
                     <td>{{ train['train_number'] }}</td>
                     <td>{{ train['train_name'] }}</td>
-                    <td>{{ train['from_sta']['departure_time'] }}</td>
-                    <td>{{ train['to_sta']['arrival_time'] }}</td>
+                    <td>{{ train['from_sta'] }}</td>
+                    <td>{{ train['to_sta'] }}</td>
                     <td>{{ train['duration'] }}</td>
                     <td>{{ ', '.join(train['run_days']) }}</td>
+                    <td><a href="{{ url_for('book.train_seat_selection', train_number=train['train_number'], from_station=from_station, to_station=to_station, travel_date=travel_date, class_type=train_class) }}">
+                        <button>Check Availability</button>
+                    </a></td>
+
                 </tr>
             {% endfor %}
         </table>

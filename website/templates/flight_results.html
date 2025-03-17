@@ -32,6 +32,20 @@
                     <td>{{ flight.get('itineraries', [{}])[0].get('segments', [{}])[0].get('arrival', {}).get('at', 'N/A') }}</td>
                     <td>{{ flight.get('itineraries', [{}])[0].get('segments', [{}])[0].get('aircraft', {}).get('code', 'N/A') }}</td>
                     <td>{{ flight.get('price', {}).get('total', 'N/A') }} {{ flight.get('price', {}).get('currency', '') }}</td>
+                    <td>
+                        <form action="{{ url_for('book.book_flight') }}" method="POST">
+                            <input type="hidden" name="flight_id" value="{{ flight['id'] }}">
+                            <input type="hidden" name="departure_code" value="{{ flight['itineraries'][0]['segments'][0]['departure']['iataCode'] }}">
+                            <input type="hidden" name="arrival_code" value="{{ flight['itineraries'][0]['segments'][0]['arrival']['iataCode'] }}">
+                            <input type="hidden" name="departure_time" value="{{ flight['itineraries'][0]['segments'][0]['departure']['at'] }}">
+                            <input type="hidden" name="arrival_time" value="{{ flight['itineraries'][0]['segments'][0]['arrival']['at'] }}">
+                            <input type="hidden" name="price" value="{{ flight['price']['grandTotal'] }}">
+                            <input type="hidden" name="traveler_type" value="{{ flight['travelerPricings'][0]['travelerType'] }}">
+                            
+                            <button type="submit">Book This Flight</button>
+                        </form>
+                                              
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
