@@ -12,16 +12,48 @@ def home():
 
 @views.route('/contact', methods=['GET', 'POST'])
 def contact():
-    return render_template("contact.html")
+    return render_template("contact.html",user=current_user )
 
 @views.route('/packages')
 def packages():
-    return render_template("packages.html")
+    return render_template("packages.html",user=current_user)
+
+@views.route('/travelgroups')
+def travelgroups():
+    return render_template("travelgroups.html", user=current_user)
+
+@views.route('/login', methods=['GET', 'POST'])
+def login():
+    return render_template("login.html", user=current_user)
+
+@views.route('/signup', methods=['GET', 'POST'])
+def signup():
+    return render_template("signup.html", user=current_user)
+
+@views.route('/start')
+def start():
+    return render_template("start.html", user=current_user)
+
+@views.route('/start2')
+def start2():
+    return render_template("start2.html", user=current_user)
+
+@views.route('/train_results')
+def train_results():
+    return render_template("train_results.html", user=current_user)
+
+@views.route('/group-details')
+def group_details():
+    return render_template("group-details.html", user=current_user)
+
+@views.route('/flight_results')
+def flight_results():
+    return render_template("flight_results.html", user=current_user)
 
 @views.route('/groups')
 def view_groups():
     groups = TravelGroup.query.all()
-    return render_template('travelgroups.html', groups=groups)
+    return render_template('travelgroups.html', groups=groups,user=current_user)
 
 @views.route('/creategroup', methods=['GET', 'POST'])
 @login_required
