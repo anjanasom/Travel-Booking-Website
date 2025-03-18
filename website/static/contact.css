@@ -3,8 +3,8 @@ body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #f0f8ff, #e6f2ff);
     color: #333;
-    margin-top: 0;
-    padding-top: 20px; 
+    margin: 0;
+    padding: 0;
 }
 .contact-header {
     background: linear-gradient(135deg, #00aaff, #0066cc);
@@ -13,7 +13,6 @@ body {
     padding: 40px;
     font-size: 1.5em;
     border-bottom: 5px solid #005bb5;
-    
 }
 .about-us, .contact-container, .faq-section, .social-media {
     max-width: 900px;
