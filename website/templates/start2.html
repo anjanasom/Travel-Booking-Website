@@ -5,33 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Booking</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='start.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
-
 </head>
 <body>
-    <header class="navbar">
-        {% if user.is_authenticated %}
-        <div class="logo">GoGlobe</div>
-        <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/travelgroups">TravelGroups</a></li>
-            <li><a href="/packages">Packages</a></li>
-            <li><a href="/contact">Contact</a></li>
-            <li><a href="/dashboard">Dashboard</a></li>
-        </ul>
-        <a class="btn-login" href="/logout">Log out</a>
-        {% else %}
-        <div class="logo">GoGlobe</div>
-        <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/travelgroups">TravelGroups</a></li>
-            <li><a href="/packages">Packages</a></li>
-            <li><a href="/contact">Contact</a></li>
-            <li><a href="/dashboard">Dashboard</a></li>
-        </ul>
-        <a class="btn-login" href="/login">Log in</a>
-        {% endif %}
-    </header>
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
         <ul class="flashes">
