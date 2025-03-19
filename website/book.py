@@ -32,7 +32,7 @@ def search_trains():
 
     if not from_station or not to_station:
         flash("Please fill in all required fields.", "error")
-        return redirect(url_for("book.start2"))
+        return redirect(url_for("book.start"))
 
     url = "https://irctc1.p.rapidapi.com/api/v3/trainBetweenStations"
     querystring = {"fromStationCode": from_station, "toStationCode": to_station, "dateOfJourney": travel_date}
@@ -277,7 +277,7 @@ def search_buses():
 
     if not from_city or not to_city:
         flash("Please fill in all required fields.", "error")
-        return redirect(url_for("book.start2"))
+        return redirect(url_for("book.start"))
 
     return f"Searching buses from {from_city} to {to_city} on {travel_date}"
 
@@ -290,6 +290,6 @@ def search_hotels():
 
     if not hotel_city:
         flash("Please enter a city for hotel search.", "error")
-        return redirect(url_for("book.start2"))
+        return redirect(url_for("book.start"))
 
     return f"Searching hotels in {hotel_city} from {checkin_date} to {checkout_date} for {num_guests}"
