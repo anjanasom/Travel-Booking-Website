@@ -1,3 +1,77 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #caf0f8;
+    padding: 1rem 2rem;
+    color: #03045e;
+    width: 100%;
+    position: fixed; /* Fixes navbar at the top */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+.navbar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+}
+.nav-links li a {
+    text-decoration: none;
+    color: #03045e;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+.nav-links li a:hover {
+    color: #0077b6;
+}
+.btn-login {
+    padding: 0.5rem 1rem;
+    background-color: #03045e;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+.btn-login:hover {
+    background-color: #0077b6;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 850px;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin-top: 80px; /* Adjusts space to avoid overlap with navbar */
+}
+
+/* Adjust body to allow scrolling */
+body {
+    background: linear-gradient(135deg, #03045e, #0077b6, #00b4d8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* Ensure travel groups appear below the navbar */
+.group-list {
+    margin-top: 20px;
+    width: 100%;
+}
+
+
 
         * {
             margin: 0;
@@ -14,7 +88,7 @@
             min-height: 100vh;
             padding: 20px;
         }
-
+ 
         .container {
             width: 90%;
             max-width: 850px;
@@ -168,3 +242,6 @@
         .group-details ul {
             padding-left: 20px;
         }
+    
+
+    
