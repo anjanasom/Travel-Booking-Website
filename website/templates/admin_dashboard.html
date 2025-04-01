@@ -15,7 +15,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
+            max-width: 1000px;
             margin: auto;
         }
         h2, h3 {
@@ -70,14 +70,53 @@
 
     <h3>Train Bookings</h3>
     <table>
-        <tr><th>Train No</th><th>From</th><th>To</th><th>Actions</th></tr>
+        <tr><th>User ID</th><th>Train No</th><th>From</th><th>To</th><th>Actions</th></tr>
         {% for booking in train_bookings %}
         <tr>
+            <td>{{ booking.user_id }}</td>
             <td>{{ booking.train_number }}</td>
             <td>{{ booking.from_station }}</td>
             <td>{{ booking.to_station }}</td>
             <td>
                 <form action="{{ url_for('admin.delete_booking', booking_type='train', booking_id=booking.id) }}" method="POST">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Flight Bookings</h3>
+    <table>
+        <tr><th>User ID</th><th>Flight No</th><th>From</th><th>To</th><th>Departure Date</th><th>Actions</th></tr>
+        {% for booking in flight_bookings %}
+        <tr>
+            <td>{{ booking.user_id }}</td>
+            <td>{{ booking.flight_number }}</td>
+            <td>{{ booking.from_city }}</td>
+            <td>{{ booking.to_city }}</td>
+            <td>{{ booking.departure_date }}</td>
+            <td>
+                <form action="{{ url_for('admin.delete_booking', booking_type='flight', booking_id=booking.id) }}" method="POST">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Hotel Bookings</h3>
+    <table>
+        <tr><th>User ID</th><th>Hotel Name</th><th>City</th><th>Check-in Date</th><th>Check-out Date</th><th>Actions</th></tr>
+        {% for booking in hotel_bookings %}
+        <tr>
+            <td>{{ booking.user_id }}</td>
+            <td>{{ booking.hotel_name }}</td>
+            <td>{{ booking.city }}</td>
+            <td>{{ booking.checkin_date }}</td>
+            <td>{{ booking.checkout_date }}</td>
+            <td>
+                <form action="{{ url_for('admin.delete_booking', booking_type='hotel', booking_id=booking.id) }}" method="POST">
                     <button type="submit">Delete</button>
                 </form>
             </td>

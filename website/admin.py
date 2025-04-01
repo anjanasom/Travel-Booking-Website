@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_required, current_user
-from .models import User, TrainBooking, FlightBooking, TravelGroup
+from .models import User, TrainBooking, FlightBooking, TravelGroup, HotelBooking
 from . import db
 
 admin = Blueprint('admin', __name__)
@@ -24,8 +24,9 @@ def admin_dashboard():
     users = User.query.all()
     train_bookings = TrainBooking.query.all()
     flight_bookings = FlightBooking.query.all()
+    hotel_bookings = HotelBooking.query.all()
     groups = TravelGroup.query.all()
-    return render_template('admin_dashboard.html', users=users, train_bookings=train_bookings, flight_bookings=flight_bookings, groups=groups)
+    return render_template('admin_dashboard.html', users=users, train_bookings=train_bookings, flight_bookings=flight_bookings, hotel_bookings=hotel_bookings, groups=groups)
 
 @admin.route('/admin/delete_user/<int:user_id>', methods=['POST'])
 @login_required

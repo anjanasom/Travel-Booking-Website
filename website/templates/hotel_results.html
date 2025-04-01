@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Search Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='flight_results.css') }}">
+</head>
+<body>
+
+    <h1>Hotel Search Results</h1>
+    
+    {% if hotels %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Hotel Name</th>
+                    <th>Location</th>
+                    <th>Check In Date</th>
+                    <th>Check Out Date</th>
+                    <th>Book Now</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for hotel in hotels %}
+                <tr>
+                    <td>{{ hotel['name'] }}</td>
+                    <td>{{ cityCode }}</td>
+                    <td>{{ checkin_date }}</td>
+                    <td>{{ checkout_date }}</td>
+                    <td>
+                        <form action="{{ url_for('book.book_hotel', hotel_id=hotel['hotelId']) }}" method="POST">
+                            <input type="hidden" name="hotel_id" value="{{ hotel['hotelId'] }}">
+                            <input type="hidden" name="hotel_name" value="{{ hotel['name'] }}">
+                            <input type="hidden" name="city" value="{{ cityCode }}">
+                            <input type="hidden" name="checkin_date" value="{{ checkin_date }}">
+                            <input type="hidden" name="checkout_date" value="{{ checkout_date }}">
+                            <input type="hidden" name="room_type" value="Standard">
+                            <button type="submit">Book Now</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No hotels found for the selected criteria.</p>
+    {% endif %}
+
+    <a href="{{ url_for('book.start') }}">Search Again</a>
+
+</body>
+</html>

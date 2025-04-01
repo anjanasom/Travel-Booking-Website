@@ -59,3 +59,25 @@ class GroupMembers(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     group_id = db.Column(db.Integer, db.ForeignKey('travel_group.id'), nullable=False)
+
+class HotelBooking(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    hotel_id = db.Column(db.String(100), nullable=False)
+    hotel_name = db.Column(db.String(100), nullable=False)
+    city = db.Column(db.String(100), nullable=False)
+    checkin_date = db.Column(db.Date, nullable=False)
+    checkout_date = db.Column(db.Date, nullable=False)
+    booking_status = db.Column(db.String(20), default="Pending")
+
+class BusBooking(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    bus_id = db.Column(db.String(100), nullable=False)
+    bus_name = db.Column(db.String(100), nullable=False)
+    from_city = db.Column(db.String(100), nullable=False)
+    to_city = db.Column(db.String(100), nullable=False)
+    travel_date = db.Column(db.Date, nullable=False)
+    seat_type = db.Column(db.String(50), nullable=False)
+    total_fare = db.Column(db.Float, nullable=False)
+    booking_status = db.Column(db.String(20), default="Pending")

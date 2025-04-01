@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template,  redirect, url_for, request, flash
 from flask_login import login_required, current_user
 from . import db
-from .models import TrainBooking, FlightBooking, TravelGroup
+from .models import TrainBooking, FlightBooking, TravelGroup, HotelBooking
 
 views = Blueprint('views', __name__)
 
@@ -87,11 +87,13 @@ def dashboard():
     train_bookings = TrainBooking.query.filter_by(user_id=current_user.id).all()
     flight_bookings = FlightBooking.query.filter_by(user_id=current_user.id).all()
     travel_groups = TravelGroup.query.filter(TravelGroup.members.any(id=current_user.id)).all()
+    hotel_bookings = HotelBooking.query.filter_by(user_id=current_user.id).all()
 
     return render_template(
         "dashboard.html", 
         user=current_user, 
         train_bookings=train_bookings, 
         flight_bookings=flight_bookings, 
-        travel_groups=travel_groups
+        travel_groups=travel_groups,
+        hotel_bookings=hotel_bookings
     )

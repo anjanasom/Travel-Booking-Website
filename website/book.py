@@ -1,8 +1,8 @@
 # For booking logic
 import requests
-from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
+from flask import Blueprint, render_template, request, redirect, url_for, flash, abort, current_app
 from flask_login import login_required, current_user
-from .models import TrainBooking, FlightBooking, db
+from .models import TrainBooking, FlightBooking, db, HotelBooking
 from amadeus import Client, ResponseError
 from datetime import datetime
 
@@ -15,7 +15,7 @@ amadeus = Client(
 )
 
 API_HEADERS = {
-    "x-rapidapi-key": "c57457b77amsh856a9c0400f47dap12d851jsn600cd2010808",
+    "x-rapidapi-key": "e56de045fdmshee40693c5fab516p1c43b9jsn871185d200be",
     "x-rapidapi-host": "irctc1.p.rapidapi.com"
 }
 
@@ -281,15 +281,107 @@ def search_buses():
 
     return f"Searching buses from {from_city} to {to_city} on {travel_date}"
 
+def search_hotels_by_city(city_code):
+    try:
+        # Get hotel data using the city code
+        response = amadeus.reference_data.locations.hotels.by_city.get(cityCode=city_code)
+        hotel_data = response.data  # this should be a list
+        
+        if not hotel_data:
+            flash("No hotels found for the selected city.", "error")
+            return []  # return an empty list if no hotels are found
+
+        # Collect hotel details from the returned data
+        hotels = []
+        for hotel in hotel_data:
+            hotel_info = {
+                'hotelId': hotel['hotelId'],
+                'name': hotel['name'],
+                'address': hotel['address']['countryCode'],  # Using country code for simplicity
+                # You can expand here to include more info if needed
+            }
+            hotels.append(hotel_info)
+
+        return hotels  # return a list of hotel details
+
+    except ResponseError as error:
+        print(f"Error fetching hotels by city: {error}")
+        flash("Failed to fetch hotel data. Please try again later.", "error")
+        return []  # return an empty list on error
+
 @book.route('/search-hotels', methods=['POST'])
 def search_hotels():
-    hotel_city = request.form.get("hotel_city")
+    city_code = request.form.get("hotel_city")
     checkin_date = request.form.get("checkin_date")
     checkout_date = request.form.get("checkout_date")
-    num_guests = request.form.get("num_guests")
+    num_guests = request.form.get("num_guests", "1") 
 
-    if not hotel_city:
-        flash("Please enter a city for hotel search.", "error")
+    # Validate input
+    if not city_code or not checkin_date or not checkout_date:
+        flash("Please enter all required fields.", "error")
         return redirect(url_for("book.start"))
 
-    return f"Searching hotels in {hotel_city} from {checkin_date} to {checkout_date} for {num_guests}"
+    try:
+        # Step 2: Get hotel IDs for the city
+        hotels = search_hotels_by_city(city_code)
+        print(hotels)
+        
+        return render_template("hotel_results.html", hotels=hotels, cityCode=city_code, checkin_date=checkin_date, num_guests=num_guests, checkout_date=checkout_date)
+
+    except ResponseError as error:
+        print(f"Error fetching hotels: {error}")
+        flash("Failed to fetch hotel data. Please try again later.", "error")
+        return redirect(url_for("book.start"))
+
+@book.route('/book_hotel/<hotel_id>', methods=['GET', 'POST'])
+def book_hotel(hotel_id):
+    if request.method == 'POST':
+        # Additional details for booking
+        checkin_date = request.form.get("checkin_date")
+        checkout_date = request.form.get("checkout_date")
+        num_guests = request.form.get("num_guests")
+        hotel_name = request.form.get("hotel_name")
+        address = request.form.get("city")
+
+        try:
+            checkIn_date = datetime.strptime(checkin_date, "%Y-%m-%d").date()  # Convert string to date
+            checkOut_date = datetime.strptime(checkout_date, "%Y-%m-%d").date()  # Convert string to date
+        except ValueError:
+            flash("Invalid date format. Please use YYYY-MM-DD.", "error")
+            return redirect(url_for("book.start"))
+
+        # Add booking to the database with more details
+        booking = HotelBooking(
+            user_id=current_user.id,
+            hotel_id=hotel_id,
+            hotel_name=hotel_name,
+            city=address,
+            checkin_date=checkIn_date,
+            checkout_date=checkOut_date,
+            booking_status="Booked"
+        )
+        db.session.add(booking)
+        db.session.commit()
+
+        flash(f"Booking confirmed for {hotel_name} from {checkin_date} to {checkout_date}.", "success")
+        return redirect(url_for('views.dashboard'))
+    
+@book.route('/cancel_hotel_booking/<int:booking_id>', methods=['POST'])
+@login_required
+def cancel_hotel_booking(booking_id):
+    # Fetch the hotel booking from the database using the booking_id
+    booking = HotelBooking.query.get_or_404(booking_id)
+
+    # Check if the booking belongs to the current user
+    if booking.user_id != current_user.id:
+        abort(403)  # Forbidden, user is not allowed to cancel another user's booking
+
+    # Delete the booking from the database
+    db.session.delete(booking)
+    db.session.commit()
+
+    # Flash a success message
+    flash("Hotel booking canceled successfully!", "success")
+
+    # Redirect to the user's dashboard or another relevant page
+    return redirect(url_for('views.dashboard'))  # Adjust to the appropriate redirect URL

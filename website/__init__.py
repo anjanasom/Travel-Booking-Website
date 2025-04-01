@@ -1,17 +1,22 @@
 #to make 'website' a python package
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from os import path
 from flask_login import LoginManager
 
 db = SQLAlchemy()
+migrate = Migrate()
 DB_NAME = "database.db"
 
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'qwertyuiop'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
+
+    migrate.init_app(app, db)
 
     from .views import views
     from .auth import auth
@@ -23,7 +28,7 @@ def create_app():
     app.register_blueprint(book, url_prefix='/')
     app.register_blueprint(admin, url_prefix='/')
 
-    from .models import User, TrainBooking, FlightBooking, TravelGroup, GroupMembers
+    from .models import User, TrainBooking, FlightBooking, TravelGroup, GroupMembers, HotelBooking, BusBooking
 
     create_database(app)
 

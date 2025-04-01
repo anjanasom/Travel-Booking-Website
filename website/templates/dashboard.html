@@ -95,6 +95,36 @@
 <p>No flight bookings found.</p>
 {% endif %}
 
+<!-- Hotel Bookings Section -->
+<h3>Your Hotel Bookings</h3>
+{% if hotel_bookings %}
+<table>
+    <tr>
+        <th>Hotel Name</th>
+        <th>Location</th>
+        <th>Check-In Date</th>
+        <th>Check-Out Date</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    {% for hotel in hotel_bookings %}
+    <tr>
+        <td>{{ hotel.hotel_name }}</td>
+        <td>{{ hotel.city }}</td>
+        <td>{{ hotel.checkin_date }}</td>
+        <td>{{ hotel.checkout_date }}</td>
+        <td>{{ hotel.booking_status }}</td>
+        <td>
+            <form action="{{ url_for('book.cancel_hotel_booking', booking_id=hotel.id) }}" method="POST">
+                <button type="submit" class="cancel-btn">Cancel</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No hotel bookings found.</p>
+{% endif %}
 
 <!-- Travel Groups Section -->
 <h3>Your Travel Groups</h3>
