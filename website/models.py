@@ -7,11 +7,14 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
     name = db.Column(db.String(150), nullable=False)
+    is_admin = db.Column(db.Boolean, default=False)
 
     # Relationships
     train_bookings = db.relationship('TrainBooking', backref='user', lazy=True, cascade="all, delete")
     flight_bookings = db.relationship('FlightBooking', backref='user', lazy=True, cascade="all, delete")
-    groups = db.relationship('TravelGroup', secondary='group_members', back_populates='members', cascade="all, delete")
+    
+    # Many-to-Many Relationship with TravelGroup
+    groups = db.relationship('TravelGroup', secondary='group_members', back_populates='members')
 
 class TrainBooking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -48,10 +51,11 @@ class TravelGroup(db.Model):
     leader = db.relationship('User', backref='created_groups', lazy=True)  # Relationship to the leader
     created_at = db.Column(db.DateTime(timezone=True), default=func.now())
 
-    # Many-to-Many Relationship with Users
-    members = db.relationship('User', secondary='group_members', back_populates='groups', cascade="all, delete")
+    # Corrected Many-to-Many Relationship
+    members = db.relationship('User', secondary='group_members', back_populates='groups')
 
 class GroupMembers(db.Model):
+    __tablename__ = 'group_members'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     group_id = db.Column(db.Integer, db.ForeignKey('travel_group.id'), nullable=False)

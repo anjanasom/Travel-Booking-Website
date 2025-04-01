@@ -17,14 +17,12 @@
         <li><a href="/contact">Contact</a></li>
         <li><a href="/dashboard">Dashboard</a></li>
     </ul>
+    <a class="btn-login" href="/logout">Log out</a>
 </header>
 
 <div class="user-info">
     <h2>Welcome, {{ user.name }}</h2>
     <p>Email: {{ user.email }}</p>
-    <form action="{{ url_for('auth.logout') }}" method="POST">
-        <button type="submit" class="logout-btn">Logout</button>
-    </form>
 </div>
 
 <!-- Train Bookings Section -->

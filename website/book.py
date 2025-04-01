@@ -15,7 +15,7 @@ amadeus = Client(
 )
 
 API_HEADERS = {
-    "x-rapidapi-key": "e56de045fdmshee40693c5fab516p1c43b9jsn871185d200be",
+    "x-rapidapi-key": "c57457b77amsh856a9c0400f47dap12d851jsn600cd2010808",
     "x-rapidapi-host": "irctc1.p.rapidapi.com"
 }
 
@@ -37,7 +37,7 @@ def search_trains():
     url = "https://irctc1.p.rapidapi.com/api/v3/trainBetweenStations"
     querystring = {"fromStationCode": from_station, "toStationCode": to_station, "dateOfJourney": travel_date}
     headers = {
-        "x-rapidapi-key": "e56de045fdmshee40693c5fab516p1c43b9jsn871185d200be",
+        "x-rapidapi-key": "74fabb6f37mshaa0690ab660bc5dp12e7d2jsn4f546578a4ca",
         "x-rapidapi-host": "irctc1.p.rapidapi.com"
     }
 

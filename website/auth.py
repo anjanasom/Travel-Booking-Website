@@ -28,8 +28,9 @@ def login():
 @auth.route('/logout')
 @login_required
 def logout():
+    is_admin = current_user.is_admin  # Save before logout
     logout_user()
-    return redirect(url_for('views.home'))
+    return redirect(url_for('auth.admin_login' if is_admin else 'views.home'))
 
 @auth.route('/signup', methods=['GET', 'POST'])
 def sign_up():
@@ -51,7 +52,12 @@ def sign_up():
         elif len(password) < 8:
             flash("Password must be at least 8 characters.", category = "error")
         else:
-            new_user = User(email=email, name=name, password=generate_password_hash(password))
+            admin_emails = {"admin7103@gmail.com", "another_admin@example.com"}  # Add emails here
+            if email in admin_emails:
+                new_user = User(email=email, name=name, password=generate_password_hash(password), is_admin=True)
+            else:
+                new_user = User(email=email, name=name, password=generate_password_hash(password))
+
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
@@ -60,3 +66,18 @@ def sign_up():
 
 
     return render_template("signup.html", user=current_user)
+
+@auth.route('/admin-login', methods=['GET', 'POST'])
+def admin_login():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        user = User.query.filter_by(email=email, is_admin=True).first()
+        if user and check_password_hash(user.password, password):
+            login_user(user, remember=True)
+            return redirect(url_for('admin.admin_dashboard'))
+        else:
+            flash("Invalid admin credentials", "error")
+
+    return render_template("admin_login.html", user=current_user)

@@ -48,22 +48,22 @@ def create_group():
         db.session.commit()
         return redirect(url_for('views.view_groups'))
 
-    return render_template('create_group.html')
+    return render_template('create_group.html', user=current_user)
 
-@views.route('/join_group/<int:group_id>')
+@views.route('/join_group/<int:group_id>', methods=['GET', 'POST'])
 @login_required
 def join_group(group_id):
     group = TravelGroup.query.get_or_404(group_id)
 
     # Check if user is already a member
     if current_user in group.members:
-        return redirect(url_for('view_groups'))
+        return redirect(url_for('views.view_groups'))
 
     # Add user to group
     group.members.append(current_user)
     db.session.commit()
 
-    return redirect(url_for('view_groups'))
+    return redirect(url_for('views.view_groups'))
 
 @views.route('/leave_travel_group/<int:group_id>', methods=['POST'])
 @login_required
