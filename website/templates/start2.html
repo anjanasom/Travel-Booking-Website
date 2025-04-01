@@ -7,6 +7,16 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='start.css') }}">
 </head>
 <body>
+    <header class="navbar">
+        <div class="logo">GoGlobe</div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/groups">TravelGroups</a></li>
+            <li><a href="/packages">Packages</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
+        </ul>
+    </header>
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
         <ul class="flashes">

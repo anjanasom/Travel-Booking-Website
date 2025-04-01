@@ -48,5 +48,31 @@
 
         <a href="{{ url_for('views.create_group') }}" class="create-group-btn">Create New Group</a>
     </div>
+    <section class="about" id="about">
+        <div class="video-container">
+            <video id="main-video" muted autoplay loop class="video">
+                <source src="{{ url_for('static', filename='diving.mp4') }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="controls">
+                <button class="control-btn" data-src="{{ url_for('static', filename='diving.mp4') }}"></button>
+                <button class="control-btn" data-src="{{ url_for('static', filename='car.mp4') }}"></button>
+                <button class="control-btn" data-src="{{ url_for('static', filename='group.mp4') }}"></button>
+            </div>
+        </div>
+    </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const video = document.getElementById("main-video");
+            const buttons = document.querySelectorAll(".control-btn");
+
+            buttons.forEach(button => {
+                button.addEventListener("click", function() {
+                    video.src = this.dataset.src;
+                    video.play();
+                });
+            });
+        });
+    </script>
 </body>
 </html>

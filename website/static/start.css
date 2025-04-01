@@ -1,31 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+body {
+    background-color: #caf0f8;
+    padding-top: 70px; /* Adjust to navbar height */
+}
 
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #caf0f8;
-            
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #caf0f8;
+    padding: 1rem 2rem;
+    color: #03045e;
+    width: 100%;
+    position: fixed;  /* Fix navbar at the top */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure it stays above other elements */
+}
 
-        }
+.navbar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
 
-  
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+}
 
-        .booking-container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 500px;
-        }
+.nav-links li a {
+    text-decoration: none;
+    color: #03045e;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
 
+.nav-links li a:hover {
+    color: #0077b6;
+}
+
+.booking-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 500px;
+    margin: 0 auto; /* Center the form */
+}
+
+       
+       
         h2 {
             text-align: center;
             margin-bottom: 20px;
