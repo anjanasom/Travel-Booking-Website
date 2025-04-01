@@ -191,7 +191,6 @@ def search_flights():
         # Fetch flight offers
         response = amadeus.shopping.flight_offers_search.get(**params)
         flight_data = response.data
-        print(flight_data)
 
         if not flight_data:
             flash("No flights found for the selected date.", "error")
@@ -324,7 +323,6 @@ def search_hotels():
     try:
         # Step 2: Get hotel IDs for the city
         hotels = search_hotels_by_city(city_code)
-        print(hotels)
         
         return render_template("hotel_results.html", hotels=hotels, cityCode=city_code, checkin_date=checkin_date, num_guests=num_guests, checkout_date=checkout_date)
 
