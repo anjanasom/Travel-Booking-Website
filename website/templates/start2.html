@@ -33,7 +33,7 @@
         <div class="tabs">
             <button class="tab active" onclick="showTab('flights', event)">Flights</button>
             <button class="tab" onclick="showTab('trains', event)">Trains</button>
-            <button class="tab" onclick="showTab('buses', event)">Buses</button>
+            
             <button class="tab" onclick="showTab('hotels', event)">Hotels</button>
         </div>
 
@@ -100,20 +100,6 @@
             <button type="submit">Search Trains</button>
         </form>
         
-
-        <!-- Buses Form -->
-        <form class="form-section" id="buses" action="{{ url_for('book.search_buses') }}" method="POST">
-            <label for="bus-from">From:</label>
-            <input type="text" id="bus-from" name="from_city" placeholder="Enter city or bus stop" required>
-        
-            <label for="bus-to">To:</label>
-            <input type="text" id="bus-to" name="to_city" placeholder="Enter city or bus stop" required>
-        
-            <label for="bus-date">Travel Date:</label>
-            <input type="date" id="bus-date" name="travel_date" required>
-        
-            <button type="submit">Search Buses</button>
-        </form>
         
 
         <!-- Hotels Form -->
