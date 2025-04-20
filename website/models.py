@@ -70,14 +70,3 @@ class HotelBooking(db.Model):
     checkout_date = db.Column(db.Date, nullable=False)
     booking_status = db.Column(db.String(20), default="Pending")
 
-class BusBooking(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    bus_id = db.Column(db.String(100), nullable=False)
-    bus_name = db.Column(db.String(100), nullable=False)
-    from_city = db.Column(db.String(100), nullable=False)
-    to_city = db.Column(db.String(100), nullable=False)
-    travel_date = db.Column(db.Date, nullable=False)
-    seat_type = db.Column(db.String(50), nullable=False)
-    total_fare = db.Column(db.Float, nullable=False)
-    booking_status = db.Column(db.String(20), default="Pending")
